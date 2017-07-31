@@ -1,0 +1,24 @@
+{
+    "name": "gam6itko/cse-carrier",
+    "description": "CSE carrier api library",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "gam6itko",
+            "email": "gam6itko@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Gam6itko\\CseCarrier\\": "src/Gam6itko/CseCarrier"
+        }
+    },
+    "require": {
+        "php": ">=5.6",
+        "jms/serializer-bundle": "^1.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    }
+}
