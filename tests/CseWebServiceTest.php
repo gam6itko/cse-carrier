@@ -29,7 +29,7 @@ class CseWebServiceTest extends TestCase
     {
         parent::__construct($name, $data, $dataName);
 
-        $this->cseWebService = new CseWebService('test', '2016');
+        $this->cseWebService = new CseWebService('test', '2016', 'http://lk-test.cse.ru/1c/ws/web1c.1cws?wsdl');
     }
 
     public function testGetReferenceData()
@@ -48,6 +48,7 @@ class CseWebServiceTest extends TestCase
             $this->assertNotEmpty($result->getList());
             $this->assertNotEmpty($result->getList()[0]);
 
+            /** @var Element $firstListElement */
             $firstListElement = $result->getList()[0];
             $this->assertTrue(is_a($firstListElement, Element::class));
 
