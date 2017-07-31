@@ -1,4 +1,5 @@
 <?php
+
 namespace Gam6itko\CseCarrier\Structure;
 
 class Element
@@ -150,6 +151,19 @@ class Element
     {
         $this->Fields = $Fields;
         return $this;
+    }
+
+    public function hasField($fieldKeyName)
+    {
+        if ($this->Fields) {
+            foreach ($this->Fields as $fieldElement) {
+                if ($fieldElement->getKey() === $fieldKeyName) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**

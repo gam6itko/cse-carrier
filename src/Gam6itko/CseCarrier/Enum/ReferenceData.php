@@ -5,6 +5,8 @@ final class ReferenceData
 {
     /**  allows to get a list of currencies that is used in other functions called by the web service */
     const Currencies = 'Currencies';
+    const TypesOfGeographicObjects = 'TypesOfGeographicObjects';
+    const TypesOfCargo = 'TypesOfCargo';
     /** The function allows to get delivery types that are used in other functions called by the web service.  */
     const DeliveryType = 'DeliveryType';
     /** The function allows to get a list of geographic objects that are used in other functions called by the web service.  */
