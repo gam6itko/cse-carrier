@@ -1,7 +1,7 @@
 {
     "name": "gam6itko/cse-carrier",
     "description": "CSE carrier api library",
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "license": "MIT",
     "authors": [
         {
