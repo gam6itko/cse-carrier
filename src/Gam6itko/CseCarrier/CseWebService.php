@@ -48,6 +48,7 @@ class CseWebService
     /**
      * @param Element $parameters
      * @return Element|false
+     * @throws \SoapFault
      */
     public function getReferenceData(Element $parameters)
     {
@@ -60,6 +61,7 @@ class CseWebService
      * @param Element $data
      * @param Element $parameters
      * @return mixed
+     * @throws \SoapFault
      */
     public function saveDocuments(Element $data, Element $parameters)
     {
@@ -73,6 +75,7 @@ class CseWebService
      * @param Element $documents
      * @param Element $parameters
      * @return mixed
+     * @throws \SoapFault
      */
     public function tracking(Element $documents, Element $parameters)
     {
@@ -88,6 +91,7 @@ class CseWebService
      * @param $number
      * @param Element $parameters
      * @return mixed
+     * @throws \SoapFault
      */
     public function printDocument($type, $printFormName, $number, Element $parameters)
     {
@@ -99,6 +103,12 @@ class CseWebService
         ]);
     }
 
+    /**
+     * @param $name
+     * @param Element $parameters
+     * @return Element
+     * @throws \SoapFault
+     */
     public function report($name, Element $parameters)
     {
         return $this->doRequest(ucfirst(__FUNCTION__), [
@@ -107,6 +117,16 @@ class CseWebService
         ]);
     }
 
+    /**
+     * @param $language
+     * @param $company
+     * @param $number
+     * @param $clientNumber
+     * @param $orderData
+     * @param $office
+     * @return Element
+     * @throws \SoapFault
+     */
     public function saveWaybillOffice($language, $company, $number, $clientNumber, $orderData, $office)
     {
         return $this->doRequest(ucfirst(__FUNCTION__), [
@@ -119,6 +139,12 @@ class CseWebService
         ]);
     }
 
+    /**
+     * @param Element $data
+     * @param Element $parameters
+     * @return Element
+     * @throws \SoapFault
+     */
     public function calc(Element $data, Element $parameters)
     {
         return $this->doRequest(ucfirst(__FUNCTION__), [
@@ -127,6 +153,12 @@ class CseWebService
         ]);
     }
 
+    /**
+     * @param Element $documents
+     * @param Element $parameters
+     * @return Element
+     * @throws \SoapFault
+     */
     public function getFormsForDocuments(Element $documents, Element $parameters)
     {
         return $this->doRequest(ucfirst(__FUNCTION__), [
@@ -135,6 +167,12 @@ class CseWebService
         ]);
     }
 
+    /**
+     * @param Element $data
+     * @param Element $parameters
+     * @return Element
+     * @throws \SoapFault
+     */
     public function getDocuments(Element $data, Element $parameters)
     {
         return $this->doRequest(ucfirst(__FUNCTION__), [
@@ -143,6 +181,12 @@ class CseWebService
         ]);
     }
 
+    /**
+     * @param Element $data
+     * @param Element $parameters
+     * @return Element
+     * @throws \SoapFault
+     */
     public function updateClientProducts(Element $data, Element $parameters)
     {
         return $this->doRequest(ucfirst(__FUNCTION__), [
@@ -151,6 +195,12 @@ class CseWebService
         ]);
     }
 
+    /**
+     * @param Element $data
+     * @param Element $parameters
+     * @return Element
+     * @throws \SoapFault
+     */
     public function createGMH(Element $data, Element $parameters)
     {
         return $this->doRequest(ucfirst(__FUNCTION__), [
@@ -159,6 +209,12 @@ class CseWebService
         ]);
     }
 
+    /**
+     * @param Element $data
+     * @param Element $parameters
+     * @return Element
+     * @throws \SoapFault
+     */
     public function deleteGMH(Element $data, Element $parameters)
     {
         return $this->doRequest(ucfirst(__FUNCTION__), [
@@ -167,6 +223,12 @@ class CseWebService
         ]);
     }
 
+    /**
+     * @param Element $data
+     * @param Element $parameters
+     * @return Element
+     * @throws \SoapFault
+     */
     public function updateDocument(Element $data, Element $parameters)
     {
         return $this->doRequest(ucfirst(__FUNCTION__), [
@@ -175,6 +237,12 @@ class CseWebService
         ]);
     }
 
+    /**
+     * @param $methodName
+     * @param $array
+     * @return Element
+     * @throws \SoapFault
+     */
     private function doRequest($methodName, $array)
     {
         $soapRequest = $this->buildRequest($array);
@@ -183,6 +251,10 @@ class CseWebService
         return $this->doResponseFixes($soapResult->return);
     }
 
+    /**
+     * @param $array
+     * @return array
+     */
     private function buildRequest($array)
     {
         return array_merge([
@@ -191,6 +263,10 @@ class CseWebService
         ], $array);
     }
 
+    /**
+     * @param Element $element
+     * @return Element
+     */
     private function doResponseFixes(Element $element)
     {
         $ensureArray = ['List', 'Fields'];
