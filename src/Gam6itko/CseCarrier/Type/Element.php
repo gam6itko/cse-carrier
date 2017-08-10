@@ -1,6 +1,5 @@
 <?php
-
-namespace Gam6itko\CseCarrier\Structure;
+namespace Gam6itko\CseCarrier\Type;
 
 class Element
 {

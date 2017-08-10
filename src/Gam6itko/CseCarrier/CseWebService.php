@@ -1,9 +1,8 @@
 <?php
-
 namespace Gam6itko\CseCarrier;
 
-use Gam6itko\CseCarrier\Structure\Element;
-use Gam6itko\CseCarrier\Structure\Row;
+use Gam6itko\CseCarrier\Type\Element;
+use Gam6itko\CseCarrier\Type\Row;
 
 /**
  * Class CseWebService
@@ -39,6 +38,7 @@ class CseWebService
         $this->password = $password;
 
         $this->soapClient = new \SoapClient($wsdlUrl, [
+            'features' => SOAP_SINGLE_ELEMENT_ARRAYS,
             'classmap' => [
                 'Element' => Element::class,
                 'Row'     => Row::class
@@ -248,7 +248,7 @@ class CseWebService
         $soapRequest = $this->buildRequest($array);
         $soapResult = $this->soapClient->__soapCall($methodName, [$soapRequest]);
 
-        return $this->doResponseFixes($soapResult->return);
+        return $soapResult->return;
     }
 
     /**
@@ -263,25 +263,4 @@ class CseWebService
         ], $array);
     }
 
-    /**
-     * @param Element $element
-     * @return Element
-     */
-    private function doResponseFixes(Element $element)
-    {
-        $ensureArray = ['List', 'Fields'];
-        foreach ($ensureArray as $key) {
-            $list = call_user_func([$element, "get$key"]);
-            if ($list) {
-                if (is_a($list, Element::class)) {
-                    call_user_func([$element, "set$key"], [$list]);
-                }
-                foreach ($list as $e) {
-                    $this->doResponseFixes($e);
-                }
-            }
-        }
-
-        return $element;
-    }
 }

@@ -2,7 +2,7 @@
 
 use Gam6itko\CseCarrier\CseWebService;
 use Gam6itko\CseCarrier\Enum\ReferenceData;
-use Gam6itko\CseCarrier\Structure\Element;
+use Gam6itko\CseCarrier\Type\Element;
 use PHPUnit\Framework\TestCase;
 
 class CseWebServiceTest extends TestCase
