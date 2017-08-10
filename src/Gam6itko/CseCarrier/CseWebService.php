@@ -25,24 +25,37 @@ class CseWebService
      */
     protected $soapClient;
 
-
     /**
      * CseService constructor.
      * @param $login
      * @param $password
-     * @param string $wsdlUrl
+     * @param bool $testMode
+     * @internal param string $wsdlUrl
      */
-    public function __construct($login, $password, $wsdlUrl = 'http://lk-test.cse.ru/1c/ws/web1c.1cws?wsdl')
+    public function __construct($login, $password, $testMode = false)
     {
         $this->login = $login;
         $this->password = $password;
 
+        $wsdlUrl = $testMode ? $this->getWsdlTest() : $this->getWsdlProd();
+
         $this->soapClient = new \SoapClient($wsdlUrl, [
+            'trace'    => $testMode,
             'features' => SOAP_SINGLE_ELEMENT_ARRAYS,
             'classmap' => [
                 'Element' => Element::class,
                 'Row'     => Row::class
             ]]);
+    }
+
+    protected function getWsdlTest()
+    {
+        return 'http://lk-test.cse.ru/1c/ws/web1c.1cws?wsdl';
+    }
+
+    protected function getWsdlProd()
+    {
+        return 'http://web.cse.ru/1c/ws/Web1C.1cws?wsdl';
     }
 
     /**
