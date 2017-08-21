@@ -67,7 +67,7 @@ class CseWebServiceTest extends TestCase
             ->setList([
                 (new Element('Destination'))
                     ->setFields([
-                        new Element('SenderGeography', 'cf862f56-442d-11dc-9497-0015170f8c09'),
+                        new Element('SenderGeography', '0e369161-442a-11dc-9497-0015170f8c09'),
                         new Element('RecipientGeography', 'cf862f56-442d-11dc-9497-0015170f8c09'),
 //                    new Element('Urgency', ''),
                         new Element('TypeOfCargo', '4aab1fc6-fc2b-473a-8728-58bcd4ff79ba'),
@@ -86,16 +86,18 @@ class CseWebServiceTest extends TestCase
 
         $result = $this->cseWebService->calc($data, $parameters);
         $this->assertNotFalse($result);
+        $this->assertEquals('Calc', $result->getKey());
+        $this->assertNotEmpty($result->getList()[0]->getList());
     }
 
     public function testOrder()
     {
-        $data = (new Element('Documents'))
+        $data = (new Element('Orders'))
             ->setList([
                 (new Element('Order'))
                     ->setFields([
                         new Element('ClientNumber', '123'),
-                        new Element('AgentNumber', ''),
+                        new Element('AgentNumber', '123'),
                         new Element('ContactPerson', ''),
                         new Element('Department', ''),
                         new Element('Project', ''),
@@ -105,13 +107,15 @@ class CseWebServiceTest extends TestCase
                         new Element('DeliveryDate', (new \DateTime('monday next week'))->format(DATE_ATOM)),
                         new Element('DeliveryTime', ''),
                         new Element('Comment', 'common comment text, nothing special'),
+                        // Sender data
                         new Element('Sender', 'SenderName'),
                         new Element('SenderOfficial', 'SenderOfficial'),
-                        new Element('SenderGeography', 'cf862f56-442d-11dc-9497-0015170f8c09'),
+                        new Element('SenderGeography', '0e369161-442a-11dc-9497-0015170f8c09'),
                         new Element('SenderAddress', 'Moscow'),
                         new Element('SenderPhone', '123-45-67'),
                         new Element('SenderEMail', 'gam6itko@gmail.com'),
                         new Element('SenderInfo', 'common sender info, nothing special'),
+                        // Recipient data
                         new Element('Recipient', 'RecipientName'),
                         new Element('RecipientOfficial', 'RecipientContactFullName'),
                         new Element('RecipientGeography', 'cf862f77-442d-11dc-9497-0015170f8c09'),
@@ -148,13 +152,13 @@ class CseWebServiceTest extends TestCase
                         new Element('ReplySMSPhone', ''),
                     ])
                     ->setTables([
-                        (new Element('ItemData'))
-                            ->setFields([
-                                new Element('Item', 'article-M055001011W'),
-                                new Element('Qty', 1, 'int'),
-                                new Element('Price', 500, 'float'),
-                                new Element('VATRate', '0'),
-                            ]),
+//                        (new Element('ItemData'))
+//                            ->setFields([
+//                                new Element('Item', 'article-M055001011W'),
+//                                new Element('Qty', 1, 'int'),
+//                                new Element('Price', 500, 'float'),
+//                                new Element('VATRate', '0'),
+//                            ]),
                         (new Element('CargoPackages'))
                             ->setList([
                                 new Element('PackageID', 'M055001011'),
@@ -174,6 +178,8 @@ class CseWebServiceTest extends TestCase
 
         $result = $this->cseWebService->saveDocuments($data, $parameters);
         $this->assertNotFalse($result);
+        $this->assertEquals('Order', $result->getKey());
+        $this->assertNotEmpty($result->getList()[0]->getProperties());
     }
 
     private function buildReferenceRequest($referenceName)

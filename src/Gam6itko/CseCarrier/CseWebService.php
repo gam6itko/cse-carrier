@@ -258,6 +258,7 @@ class CseWebService
      */
     private function doRequest($methodName, $array)
     {
+        // workaround - server not accept nil fields like <ns1:Properties xsi:nil="true"/>
         foreach ($array as &$a) {
             if (is_a($a, Element::class)) {
                 /** @var Element $a */

@@ -36,7 +36,7 @@ class Element
     /** @var */
     protected $BData;
 
-    public function __construct($Key = null, $Value = null, $ValueType = null)
+    public function __construct($Key = null, $Value = null, $ValueType = 'string')
     {
         $this->Key = $Key;
         $this->Value = $Value;
