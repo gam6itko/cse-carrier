@@ -258,9 +258,15 @@ class CseWebService
      */
     private function doRequest($methodName, $array)
     {
-        $soapRequest = $this->buildRequest($array);
-        $soapResult = $this->soapClient->__soapCall($methodName, [$soapRequest]);
+        foreach ($array as &$a) {
+            if (is_a($a, Element::class)) {
+                /** @var Element $a */
+                $a = $a->toArray();
+            }
+        }
 
+        $soapRequest = $this->completeRequest($array);
+        $soapResult = $this->soapClient->__soapCall($methodName, [$soapRequest]);
         return $soapResult->return;
     }
 
@@ -268,7 +274,7 @@ class CseWebService
      * @param $array
      * @return array
      */
-    private function buildRequest($array)
+    private function completeRequest($array)
     {
         return array_merge([
             'login'    => $this->login,

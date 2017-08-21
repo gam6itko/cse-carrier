@@ -43,6 +43,27 @@ class Element
         $this->ValueType = $ValueType;
     }
 
+    public function toArray()
+    {
+        $vars = get_object_vars($this);
+        return $this->_toArray($vars);
+    }
+
+    protected function _toArray($vars)
+    {
+        $result = [];
+        foreach ($vars as $key => $val) {
+            if ($val === null) {
+                continue;
+            } else if (is_array($val)) {
+                $val = $this->_toArray($val);
+            } else if (method_exists($val, 'toArray')) {
+                $val = $val->toArray();
+            }
+            $result[$key] = $val;
+        }
+        return $result;
+    }
 
     /**
      * @return string
