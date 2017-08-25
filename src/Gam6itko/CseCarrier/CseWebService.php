@@ -158,12 +158,14 @@ class CseWebService
      * @return Element
      * @throws \SoapFault
      */
-    public function calc(Element $data, Element $parameters)
+    public function calc(Element $data, Element $parameters = null)
     {
-        return $this->doRequest(ucfirst(__FUNCTION__), [
-            'data'       => $data,
-            'parameters' => $parameters
-        ]);
+        $arr = ['data' => $data];
+        if ($parameters) {
+            $arr['parameters'] = $parameters;
+        }
+
+        return $this->doRequest(ucfirst(__FUNCTION__), $arr);
     }
 
     /**

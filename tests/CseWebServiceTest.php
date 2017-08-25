@@ -101,9 +101,11 @@ class CseWebServiceTest extends TestCase
                         new Element('ContactPerson', ''),
                         new Element('Department', ''),
                         new Element('Project', ''),
+                        // take
                         new Element('TakeDate', (new \DateTime())->format(DATE_ATOM)),
                         new Element('TakeTime', '10 - 12'),
                         new Element('TakeAtOffice', ''),
+                        // delivery
                         new Element('DeliveryDate', (new \DateTime('monday next week'))->format(DATE_ATOM)),
                         new Element('DeliveryTime', ''),
                         new Element('Comment', 'common comment text, nothing special'),
@@ -123,6 +125,7 @@ class CseWebServiceTest extends TestCase
                         new Element('RecipientPhone', '765-43-21'),
                         new Element('RecipientEMail', 'recipient@gmail.com'),
                         new Element('RecipientInfo', 'common recipient info, nothing special'),
+                        // cargo
                         new Element('Repository', ''),
                         new Element('Urgency', '18c4f207-458b-11dc-9497-0015170f8c09'),
                         new Element('Payer', '2'),
