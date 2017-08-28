@@ -10,13 +10,13 @@ class CseWebServiceTest extends TestCase
     protected $referenceFields = [
         ReferenceData::BaseUnitsOfMeasurement   => [],
         ReferenceData::Currencies               => ['FullName', 'IsFolder', 'Parent', 'Level', 'Default'],
-        ReferenceData::TypesOfGeographicObjects => ['Country', 'Town'],
-        ReferenceData::DeliveryType             => ['Information', 'Default'],
-        ReferenceData::TypesOfGeographicObjects => ['Country', 'Town'],
-        ReferenceData::TypesOfCargo             => ['Default'],
         ReferenceData::DeliveryType             => ['Information', 'Default'],
         ReferenceData::Geography                => ['Default', 'Parent', 'IsFolder', 'Level', 'Settlement', 'State', 'Type', 'KLADR', 'ID', 'AltCode', 'FIAS', 'PrimaryState', 'HaveDependentObjects', 'HaveDependentSubwayStations'],
+        ReferenceData::Payers                   => [],
+        ReferenceData::TypesOfGeographicObjects => ['Country', 'Town'],
+        ReferenceData::TypesOfCargo             => ['Default'],
         ReferenceData::UnitsOfMeasurement       => [],
+        ReferenceData::Urgencies                => ['Default', 'Information'],
     ];
 
 
