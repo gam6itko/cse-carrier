@@ -1,9 +1,9 @@
 <?php
 namespace Gam6itko\CseCarrier\Enum;
 
-class Payer
+final class Payer
 {
     const Customer = 0;
     const Sender = 1;
-    const Reciever = 2;
+    const Receiver = 2;
 }
